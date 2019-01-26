@@ -1,8 +1,8 @@
 package org.javathon16.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Company {
@@ -15,7 +15,10 @@ public class Company {
 
     private int maxBonus;
 
-    private Company(){};
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    Set<Bonus> bonuses = new HashSet<>();
+
+    private Company(){}
 
     public Company(Long id, String name, int maxBonus){
         this.id = id;
